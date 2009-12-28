@@ -18,6 +18,12 @@ a:visited { color: blue;}
 ul {margin:4px;padding:4px;}
 ul li {margin:4px;padding:4px;line-height:25px;}
 
+pre {
+  border-top: 1px solid silver;
+  border-bottom: 1px solid silver;
+  padding:5px;
+}
+
 #wrapper {
   width: 1000px;
   margin: 0 auto;
@@ -60,15 +66,29 @@ ul.topics li {margin:4px;padding:4px;}
 <body id='wrapper'>
   <h1>Admin Data Documentation</h1>
 
-  <div>
-    <a name='introduction'></a>
-    <ul style='float:right;border:1px solid #ededed;' class='topics'>
+    <ul class='topics'>
       <li><a href='#introduction'>Introduction</a></li>
+      <li><a href='#non_intrusive'>Non intrusive</a></li>
       <li><a href='http://demo.neeraj.name'>Live Demo</a></li>
+      <li><a href='#requirement'>Requirement</a></li>
+      <li><a href='#installation_instruction'>Installation Instruction</a></li>
+      <li><a href='#how_to_use_it'>How to use it</a></li>
       <li><a href='#features'>Features</a></li>
+      <li><a href='#override_find_condition'>Provide Custom Find Condition</a></li>
+      <li>
+        <a href='#only_one_element'>
+          Restrict editing of record to only one attribute
+        </a>
+      </li>
+      <li><a href='#how_to_run_test'>How to run tests for this plugin</a></li>
+      <li><a href='#tested_with'>Tested with</a></li>
+      <li><a href='#feedback'>Feedback</a></li>
     </ul>
-    <div style='float:left;width:80%;'>
-      <h3 style='margin-top:0;'>What?</h3>
+
+
+      <a name='introduction'></a>
+      <h2>Introduction</h2>
+      <h3>What?</h3>
       <p>
         admin_data is a rails plugin which allows admin of a site to easily browse, search and manage data using
         browser. <a href=''>Here is </a> list of features of this plugin.
@@ -91,6 +111,48 @@ ul.topics li {margin:4px;padding:4px;}
         This plugin has been developed by <a href=''>Neeraj</a> with support from other contributors.
       </p>
 
+      <a name='non_intrusive'></a>
+      <h2>Non Intrusive</h2>
+      <p>
+        All the features provided by admin_data are totally non intrusive. No change is required anywhere
+        in your application. No named_scope is created. So no lingering named_scope in your application.
+        Nothing is stored in session or in cookies.
+      </p>
+      <p>
+        Configuration options should be passed to admin_data by creating a file under initializers directory. 
+        The file should look something like
+        <strong>~/config/initializers/admin_data_settings.rb</strong> .
+      </p>
+
+
+      <a name='requirement'></a>
+      <h2>Requirement</h2>
+      <ul>
+        <li>
+          Rails project must be using Rails 2.3.x .
+        </li>
+        <li>
+          will_paginate gem .
+        </li>
+      </ul>
+
+      <a name='installation_instruction'></a>
+      <h2>Installation Instruction</h2>
+<pre>
+ruby script/plugin install git://github.com/neerajdotname/admin_data.git
+</pre>
+
+
+      <a name='how_to_use_it'></a>
+      <h2>How to use it</h2>
+      <p>
+        Start server and then go to <strong>http://localhost:3000/admin_data </strong> .
+        </p>  
+
+
+
+
+
       <a name='features'></a>
       <h2>Features</h2>
       <h3>Browsing and Searching</h3>
@@ -102,13 +164,159 @@ ul.topics li {margin:4px;padding:4px;}
           Quick search across all records in a table. Quick searche goes through all columns that are either ‘string’ or ‘text’ type.
         </li>
         <li>
-          Advance search for each field of each of the tables. Different options appear for diffent data types. click here to see advance search in action. Do try selecting different data types to see different options.
+          Advance search for each field of each of the tables. Different options appear for diffent data types. 
+          <a href='http://demo.neeraj.name/admin_data/user/advance_search'>click here</a> to see advance search 
+          in action. Do try selecting different data types to see different options.
         </li>
         <li>
-          For both quick search and advance search, you can sort the result in ascending or descending order of any column.
+          For both quick search and advance search, you can sort the result in ascending or descending order of 
+          any column.
         </li>
         <li>
-        Browse <a href='http://demo.neeraj.name/admin_data/migration'>migration records</a> from schema_migrations table even though there is no corresponding model for this table.
+          Browse <a href='http://demo.neeraj.name/admin_data/migration'>migration records</a> from 
+          schema_migrations table even though there is no corresponding model for this table.
+        </li>
+      </ul>
+
+      <h3>Association Information</h3>
+      <ul>
+        <li>
+          For each individual record a snapshot of all association records is shown. If an associated 
+          record is not present then there will be no link. 
+          <a href='http://demo.neeraj.name/admin_data/user/1'>click here</a> 
+          to see a record which has 
+          some associations. Notice that you can browse to all associated records by just clicking the link.
+        </li>
+        <li>
+          Next to has_many association a count of number of associated records is shown.
+        </li>
+        <li>
+          All the associated records are links so one can navigate from record to record.
+        </li>
+      </ul>
+
+      <h3>Model validation</h3>
+      <ul>
+        <li>
+          This plugin comes with a rake task which can be executed to validate all your models. All the 
+          records are retrieved one by one. It means even if you have 5 million records you will not 
+          run out of memory. However it might take a while for validation to complete.
+<pre>
+rake admin_data:validate_models
+</pre>
+        </li>
+        <li>
+          In certain environment like staging I don’t have access to the box and I can’t run rake tasks. 
+          In such cases you can validate models using browser. Just visit diagnostic section and click on validate models.
+        </li>
+      </ul>
+
+      <h3>Miscellaneous features</h3>
+      <ul>
+        <li>
+          No security check is done in development environment. In any other environment proper security
+          check is done for adding a record, editing a record, deleting a record, browsing a record. 
+          <a href=''>Click here</a> for a security overview.
+        </li>
+        <li>
+          admin_data supports namespaced models like <strong>Vehicle::Car</strong> .
+          </li>
+          <li>
+            Diagnostic test lists all the columns which are foreign keys but 
+            <a href='http://demo.neeraj.name/admin_data/missing_index'>index is not defined</a> 
+            on them.
+          </li>
+          <li>
+            Plugin does not assume that all the tables have primary key as ‘id’. It respects the primary_key set in the model.
+          </li>
+          <li>
+            While updating a record just show me only one field. <a href=''>More on this here</a> .
+          </li>
+          <li>
+            RSS feed for all the models. <a href=''>More on this here</a> .
+          </li>
+          <li>
+            Various <a href=''>configuration options</a> .
+          </li>
+      </ul>
+
+      <a name='only_one_element'></a>
+      <h2>Restrict editing of record to only one attribute</h2>
+      <p>
+        If you are editing a record of user then url might look like this
+        <strong>
+          http://localhost:3000/admin_data/user/881/edit
+        </strong>
+        .
+      </p>
+
+      <p>
+       To avoid visual clutter, if you want to see only one field called 'first_name' while editing 
+       then the url should look like this
+       <strong>
+          http://localhost:3000/admin_data/user/881/edit?attr=first_name
+       </strong>
+       </p>
+
+
+
+      <a name='override_find_condition'></a>
+      <h2>Override the default find condition</h2>
+      <p> I have a model called 'City' which is defined like this.</p>
+<pre>
+class City < ActiveRecord::Base
+  def to_param
+    self.permanent_name
+  end
+end
+</pre>
+
+      <p>
+        This plugin will generate show method for city like this 
+        <strong>/admin_data/city/miami</strong> . 
+        The controller will execute the query assuming that id is ‘miami’ and the record will not be found.
+      </p>
+      <p>
+        Here is how to pass custom find option to admin_data.
+      </p>
+
+<pre>
+AdminDataConfig.set = {
+  :find_conditions => Proc.new do |params| 
+    { 'City' => {:conditions => { :permanent_name => params[:id]}}}
+  end
+}
+</pre>
+
+
+      <a name='how_to_run_test'></a>
+      <h2>How to run test</h2>
+      <p>
+        This plugin has over 200 tests. To run those tests just go to the root of the plugin directory
+        and type <strong>rake</strong> .
+      </p>
+      
+
+      <a name='tested_with'></a>
+      <h2>Tested With</h2>
+      <p>
+        I have tested this plugin with MySQL, PostgreSQL and Oracle.
+      </p>
+
+      <p>
+        Run all the tests by going to the plugin directory and executing <strong>rake</strong> . 
+        There are nearly 200 tests and all of them should pass.
+      </p>
+
+
+      <a name='feedback'></a>
+      <h2>Feedback</h2>
+      <ul>
+        <li>
+          Email me: neerajdotname [at] gmail (dot) com
+        </li>
+        <li>
+        Report any bug at <a href='http://github.com/neerajdotname/admin_data/issues'>http://github.com/neerajdotname/admin_data/issues</a> .
         </li>
       </ul>
 
