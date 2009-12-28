@@ -87,13 +87,13 @@ ul.topics li {margin:4px;padding:4px;}
       <h2>Introduction</h2>
       <h3>What?</h3>
       <p>
-        admin_data is a rails plugin which allows admin of a site to easily browse, search and manage data using
+        admin_data is a Rails plugin which allows admin of a site to easily browse, search and manage data using
         browser. <a href=''>Here is </a> list of features of this plugin.
       </p>
 
       <h3>Why?</h3>
       <p>
-        In almost all web based applications, admin needs to have access beter access to data to perform jobs
+        In almost all web based applications, admin needs to have better access to data to perform jobs
         like monitoring, analysis and debugging.
       </p>
 
@@ -105,14 +105,14 @@ ul.topics li {margin:4px;padding:4px;}
 
       <h3>Who?</h3>
       <p>
-        This plugin has been developed by <a href=''>Neeraj</a> with support from other contributors.
+        This plugin has been developed by <a href='http://neeraj.name'>Neeraj</a> with support from other contributors.
       </p>
 
       <a name='non_intrusive'></a>
       <h2>Non Intrusive</h2>
       <p>
         All the features provided by admin_data are totally non intrusive. No change is required anywhere
-        in your application. No named_scope is created. So no lingering named_scope in your application.
+        in your application. No named_scope is created and hence no lingering named_scope in your application.
         Nothing is stored in session or in cookies.
       </p>
       <p>
@@ -158,18 +158,19 @@ ruby script/plugin install git://github.com/neerajdotname/admin_data.git
       <h3>Browsing and Searching</h3>
       <ul>
         <li>
-          Browse table records.
+          Browse all records with pagination.
         </li>
         <li>
-          Quick search across all records in a table. Quick searche goes through all columns that are either ‘string’ or ‘text’ type.
+          Quick search across all records in a table. Quick searche goes through all columns 
+          that are either ‘string’ or ‘text’ type.
         </li>
         <li>
           Advance search for each field of each of the tables. Different options appear for diffent data types. 
-          <a href='http://demo.neeraj.name/admin_data/user/advance_search'>click here</a> to see advance search 
+          <a href='http://demo.neeraj.name/admin_data/user/advance_search'>Click here</a> to see advance search 
           in action. Do try selecting different data types to see different options.
         </li>
         <li>
-          For both quick search and advance search, you can sort the result in ascending or descending order of 
+          For both quick search and advance search, result can be sorted in ascending or in descending order of 
           any column.
         </li>
         <li>
@@ -181,17 +182,17 @@ ruby script/plugin install git://github.com/neerajdotname/admin_data.git
       <h3>Association Information</h3>
       <ul>
         <li>
-          For each individual record a snapshot of all association records is shown. If an associated 
-          record is not present then there will be no link. 
-          <a href='http://demo.neeraj.name/admin_data/user/1'>click here</a> 
+          For each individual record a snapshot of all associated records is shown. 
+          <a href='http://demo.neeraj.name/admin_data/user/1'>Click here</a> 
           to see a record which has 
           some associations. Notice that you can browse to all associated records by just clicking the link.
+          If an associated record is not present then there will be no link. 
         </li>
         <li>
           Next to has_many association a count of number of associated records is shown.
         </li>
         <li>
-          All the associated records are links so one can navigate from record to record.
+          All the associated records are links so you can navigate from record to record.
         </li>
       </ul>
 
@@ -216,7 +217,7 @@ rake admin_data:validate_models
         <li>
           No security check is done in development environment. In any other environment proper security
           check is done for adding a record, editing a record, deleting a record, browsing a record. 
-          <a href=''>Click here</a> for a security overview.
+          <a href='#security'>Click here</a> for a security overview.
         </li>
         <li>
           admin_data supports namespaced models like <strong>Vehicle::Car</strong> .
@@ -230,9 +231,6 @@ rake admin_data:validate_models
             Plugin does not assume that all the tables have primary key as ‘id’. It respects the primary_key set in the model.
           </li>
           <li>
-            While updating a record just show me only one field. <a href=''>More on this here</a> .
-          </li>
-          <li>
             RSS feed for all the models. <a href=''>More on this here</a> .
           </li>
           <li>
@@ -244,7 +242,7 @@ rake admin_data:validate_models
       <a name='security'></a>
       <h2>Security Configurations</h2>
       <p>
-        This plugin allows you to configure security check for both view and update access. Default security check is to allow both view and update access in development mode and restrict both view and update access in any other environment.
+        Default security configuration is to allow both view and update access in development mode and restrict both view and update access in any other environment.
       </p>
 
       <h3>Default Security</h3>
@@ -285,7 +283,7 @@ AdminDataConfig.set = {
 
       <p>
        To avoid visual clutter, if you want to see only one field called 'first_name' while editing 
-       then the url should look like this
+       then, the url should look like this
        <strong>
           http://localhost:3000/admin_data/user/881/edit?attr=first_name
        </strong>
@@ -344,7 +342,7 @@ colorblackyear2000
 
       <p>
         This is not very useful. However I know that I am getting that value because that is output of 
-        to_s operation on a hash. If I could ask plugin to perfomr to_inspect method on a hash 
+        to_s operation on a hash. If I could ask plugin to perform to_inspect method on a hash 
         then output will be much more easy to read.  Given below is how I can ask plugin to perform inspect method on data column.
       </p>
 
@@ -361,7 +359,7 @@ AdminDataConfig.set = ({
 
       <p>
         Based on this setting the new output would be much more readable and you can see the 
-        <a hre='http://demo.neeraj.name/admin_data/car/1'>result herea</a> .
+        <a hre='http://demo.neeraj.name/admin_data/car/1'>result here</a> .
       </p>  
 
       
