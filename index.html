@@ -19,9 +19,8 @@ ul {margin:4px;padding:4px;}
 ul li {margin:4px;padding:4px;line-height:25px;}
 
 pre {
-  border-top: 1px solid silver;
-  border-bottom: 1px solid silver;
   padding:5px;
+  background: #EFF6FF;
 }
 
 #wrapper {
@@ -71,15 +70,13 @@ ul.topics li {margin:4px;padding:4px;}
       <li><a href='#non_intrusive'>Non intrusive</a></li>
       <li><a href='http://demo.neeraj.name'>Live Demo</a></li>
       <li><a href='#requirement'>Requirement</a></li>
-      <li><a href='#installation_instruction'>Installation Instruction</a></li>
+      <li><a href='#installation_instruction'>Source Code and Installation Instruction</a></li>
       <li><a href='#how_to_use_it'>How to use it</a></li>
       <li><a href='#features'>Features</a></li>
+      <li><a href='#security'>Security Configurations</a></li>
       <li><a href='#override_find_condition'>Provide Custom Find Condition</a></li>
-      <li>
-        <a href='#only_one_element'>
-          Restrict editing of record to only one attribute
-        </a>
-      </li>
+      <li><a href='#override_default_column'>Override the default behaviour of column</a></li>
+      <li> <a href='#only_one_element'> Restrict editing of record to only one attribute </a> </li>
       <li><a href='#how_to_run_test'>How to run tests for this plugin</a></li>
       <li><a href='#tested_with'>Tested with</a></li>
       <li><a href='#feedback'>Feedback</a></li>
@@ -137,7 +134,10 @@ ul.topics li {margin:4px;padding:4px;}
       </ul>
 
       <a name='installation_instruction'></a>
-      <h2>Installation Instruction</h2>
+      <h2>Source Code and Installation Instruction</h2>
+      <p>
+        Source code is available <a href='http://github.com/neerajdotname/admin_data'>here</a> .
+      </p>
 <pre>
 ruby script/plugin install git://github.com/neerajdotname/admin_data.git
 </pre>
@@ -240,6 +240,39 @@ rake admin_data:validate_models
           </li>
       </ul>
 
+
+      <a name='security'></a>
+      <h2>Security Configurations</h2>
+      <p>
+        This plugin allows you to configure security check for both view and update access. Default security check is to allow both view and update access in development mode and restrict both view and update access in any other environment.
+      </p>
+
+      <h3>Default Security</h3>
+<pre>
+AdminDataConfig.set = {
+  :is_allowed_to_view => lambda {|controller| return true if Rails.env.development? },
+  :is_allowed_to_update => lambda {|controller| return true if Rails.env.development? },
+}
+</pre>
+
+    <h3>Customize Security for the whole application</h3>
+    <p>
+      Put the following lines of code in an initializer at 
+      <strong>~/config/initializers/admin_data_settings.rb</strong> .
+    </p>
+<pre>
+AdminDataConfig.set = {
+  :is_allowed_to_view => lambda {|controller| controller.send('logged_in?') },
+  :is_allowed_to_update => lambda {|controller| controller.send('admin_logged_in?') },
+}
+</pre>
+
+    <p>
+      In the above case application_controller.rb must have two method logged_in? and admin_logged_in? .
+    </p>
+
+
+      
       <a name='only_one_element'></a>
       <h2>Restrict editing of record to only one attribute</h2>
       <p>
@@ -288,6 +321,50 @@ AdminDataConfig.set = {
 }
 </pre>
 
+
+      <a name='override_default_column'></a>
+      <h2>Override the default behaviour of column</h2>
+      <p> I have a model like this</p>
+<pre>
+class Car < ActiveRecord::Base
+  serialize :data
+end
+</pre>
+
+      <p>I am going to create a record and set a value to data.</p>
+
+<pre>
+Car.create(:color => ‘black’, :year => ‘2000’)
+</pre>
+
+      <p>If you look at this record using admin_data then for the column ‘data’ you will see value like this. </p>
+<pre>
+colorblackyear2000 
+</pre>
+
+      <p>
+        This is not very useful. However I know that I am getting that value because that is output of 
+        to_s operation on a hash. If I could ask plugin to perfomr to_inspect method on a hash 
+        then output will be much more easy to read.  Given below is how I can ask plugin to perform inspect method on data column.
+      </p>
+
+<pre>
+AdminDataConfig.set = ({
+  :column_settings => { 'Car' => { :data => lambda{|model| model.send(:data).inspect}}}
+})
+</pre>
+
+      <p>
+        The plugin passes the whole model record to the proc and the users can customize the value for 
+        that model as per their taste.
+      </p>  
+
+      <p>
+        Based on this setting the new output would be much more readable and you can see the 
+        <a hre='http://demo.neeraj.name/admin_data/car/1'>result herea</a> .
+      </p>  
+
+      
 
       <a name='how_to_run_test'></a>
       <h2>How to run test</h2>
