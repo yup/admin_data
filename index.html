@@ -1,1 +1,121 @@
-My GitHub Page
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset=utf-8 />
+<meta name="viewport" content="width=620" />
+<title>admin_data plugin documentation</title>
+<style>
+body { 
+  font: normal 17px Helvetica, sans-serif;
+  background: rgb(237, 237, 236);
+  margin: 0;
+  margin-top: 40px;
+  padding: 0;
+}
+
+a:visited { color: blue;}
+
+ul {margin:4px;padding:4px;}
+ul li {margin:4px;padding:4px;line-height:25px;}
+
+#wrapper {
+  width: 1000px;
+  margin: 0 auto;
+  background: #fff; 
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-top: 1px solid #fff;
+  padding-bottom: 76px;
+}
+
+h1 {
+  padding: 10px 0;
+}
+
+h2 {
+  font-size: 35px;
+  background: #e6e6e6;
+  margin: 40px 0 0 0;
+  padding: 10px 0 10px 2px;
+}
+
+h3 {
+  margin-top: 30px;
+  margin-bottom:0;
+  padding-bottom:0;
+  border-bottom: 1px solid #ededec;
+}
+
+p {
+	line-height: 25px;
+	font-size: 18px;
+}
+
+ul.topics {font-size: 20px;list-style:none;}
+ul.topics li {margin:4px;padding:4px;}
+
+.clear {clear:both;}
+</style>
+</head>
+<body id='wrapper'>
+  <h1>Admin Data Documentation</h1>
+
+  <div>
+    <a name='introduction'></a>
+    <ul style='float:right;border:1px solid #ededed;' class='topics'>
+      <li><a href='#introduction'>Introduction</a></li>
+      <li><a href='http://demo.neeraj.name'>Live Demo</a></li>
+      <li><a href='#features'>Features</a></li>
+    </ul>
+    <div style='float:left;width:80%;'>
+      <h3 style='margin-top:0;'>What?</h3>
+      <p>
+        admin_data is a rails plugin which allows admin of a site to easily browse, search and manage data using
+        browser. <a href=''>Here is </a> list of features of this plugin.
+      </p>
+
+      <h3>Why?</h3>
+      <p>
+        In almost all web based applications, admin needs to have access beter access to data to perform jobs
+        like monitoring, analysis and debugging.
+      </p>
+
+      <h3>Where?</h3>
+      <p>
+      The plugin is available here. A <a href='http://demo.neeraj.name'>live demo</a> is available here. Note that in the live demo you will
+        not be able to access certain features.
+      </p>
+
+      <h3>Who?</h3>
+      <p>
+        This plugin has been developed by <a href=''>Neeraj</a> with support from other contributors.
+      </p>
+
+      <a name='features'></a>
+      <h2>Features</h2>
+      <h3>Browsing and Searching</h3>
+      <ul>
+        <li>
+          Browse table records.
+        </li>
+        <li>
+          Quick search across all records in a table. Quick searche goes through all columns that are either ‘string’ or ‘text’ type.
+        </li>
+        <li>
+          Advance search for each field of each of the tables. Different options appear for diffent data types. click here to see advance search in action. Do try selecting different data types to see different options.
+        </li>
+        <li>
+          For both quick search and advance search, you can sort the result in ascending or descending order of any column.
+        </li>
+        <li>
+        Browse <a href='http://demo.neeraj.name/admin_data/migration'>migration records</a> from schema_migrations table even though there is no corresponding model for this table.
+        </li>
+      </ul>
+
+
+    </div>  
+    <div class='clear'></div>
+  </div>
+
+</body>
+</html>
