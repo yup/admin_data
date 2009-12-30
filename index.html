@@ -23,6 +23,13 @@ pre {
   background: #EFF6FF;
 }
 
+tt {
+background-color:#DDDDDD;
+font-size:90%;
+padding: 5px;
+margin: 0 2px;
+}
+
 #wrapper {
   width: 1000px;
   margin: 0 auto;
@@ -38,7 +45,7 @@ h1 {
 }
 
 h2 {
-  font-size: 35px;
+  font-size: 32px;
   background: #e6e6e6;
   margin: 40px 0 0 0;
   padding: 10px 0 10px 2px;
@@ -65,22 +72,37 @@ ul.topics li {margin:4px;padding:4px;}
 <body id='wrapper'>
   <h1>Admin Data Documentation</h1>
 
+  <div>
+  <div style='float:left;width: 400px;'>
+    <h3>General Info</h3>
     <ul class='topics'>
       <li><a href='#introduction'>Introduction</a></li>
-      <li><a href='#non_intrusive'>Non intrusive</a></li>
+      <li><a href='#non_intrusive'>Non Intrusive</a></li>
       <li><a href='http://demo.neeraj.name'>Live Demo</a></li>
       <li><a href='#requirement'>Requirement</a></li>
-      <li><a href='#installation_instruction'>Source Code and Installation Instruction</a></li>
+      <li><a href='#installation_instruction'>Source code and installation instruction</a></li>
       <li><a href='#how_to_use_it'>How to use it</a></li>
+      <li><a href='#how_to_pass_configuration'>How to pass configuration to plugin</a></li>
       <li><a href='#features'>Features</a></li>
-      <li><a href='#security'>Security Configurations</a></li>
-      <li><a href='#override_find_condition'>Provide Custom Find Condition</a></li>
-      <li><a href='#override_default_column'>Override the default behaviour of column</a></li>
-      <li> <a href='#only_one_element'> Restrict editing of record to only one attribute </a> </li>
       <li><a href='#how_to_run_test'>How to run tests for this plugin</a></li>
       <li><a href='#tested_with'>Tested with</a></li>
       <li><a href='#feedback'>Feedback</a></li>
     </ul>
+  </div>
+
+  <div style='float:right;width: 500px;'>
+    <h3>Customizing admin_data</h3>
+    <ul class='topics'>
+      <li><a href='#security'>Security configuration</a></li>
+      <li><a href='#override_find_condition'>Custom find condition</a></li>
+      <li><a href='#override_default_column'>Override the default behaviour of column</a></li>
+      <li> <a href='#only_one_element'> Restrict editing of record to only one attribute </a> </li>
+      <li> <a href='#rss_feed'>RSS feed for all models</a> </li>
+    </ul>
+  </div>
+  <div class='clear'></div>
+  <div>
+
 
 
       <a name='introduction'></a>
@@ -88,7 +110,7 @@ ul.topics li {margin:4px;padding:4px;}
       <h3>What?</h3>
       <p>
         admin_data is a Rails plugin which allows admin of a site to easily browse, search and manage data using
-        browser. <a href=''>Here is </a> list of features of this plugin.
+        browser. <a href='#features'>Here is </a> list of features of this plugin.
       </p>
 
       <h3>Why?</h3>
@@ -99,7 +121,7 @@ ul.topics li {margin:4px;padding:4px;}
 
       <h3>Where?</h3>
       <p>
-      The plugin is available here. A <a href='http://demo.neeraj.name'>live demo</a> is available here. Note that in the live demo you will
+        Source code is available <a href='http://github.com/neerajdotname/admin_data'>here</a> . A <a href='http://demo.neeraj.name'>live demo</a> is available here. Note that in the live demo you will
         not be able to access certain features.
       </p>
 
@@ -118,7 +140,7 @@ ul.topics li {margin:4px;padding:4px;}
       <p>
         Configuration options should be passed to admin_data by creating a file under initializers directory. 
         The file should look something like
-        <strong>~/config/initializers/admin_data_settings.rb</strong> .
+        <tt>~/config/initializers/admin_data_settings.rb</tt> .
       </p>
 
 
@@ -146,12 +168,15 @@ ruby script/plugin install git://github.com/neerajdotname/admin_data.git
       <a name='how_to_use_it'></a>
       <h2>How to use it</h2>
       <p>
-        Start server and then go to <strong>http://localhost:3000/admin_data </strong> .
-        </p>  
+        Start server and then go to <tt>http://localhost:3000/admin_data </tt> .
+      </p>  
 
-
-
-
+      <a name='how_to_pass_configuration'></a>
+      <h2>How to pass configuration options to plugin</h2>
+      <p>
+        Just create a file named <tt>admin_data_settings.rb</tt> at <tt>~/config/initializers</tt> and
+        in this file put all your custom configurations for this plugin.
+      </p>  
 
       <a name='features'></a>
       <h2>Features</h2>
@@ -220,7 +245,7 @@ rake admin_data:validate_models
           <a href='#security'>Click here</a> for a security overview.
         </li>
         <li>
-          admin_data supports namespaced models like <strong>Vehicle::Car</strong> .
+          admin_data supports namespaced models like <tt>Vehicle::Car</tt> .
           </li>
           <li>
             Diagnostic test lists all the columns which are foreign keys but 
@@ -231,10 +256,17 @@ rake admin_data:validate_models
             Plugin does not assume that all the tables have primary key as ‘id’. It respects the primary_key set in the model.
           </li>
           <li>
-            RSS feed for all the models. <a href=''>More on this here</a> .
+            RSS feed for all the models. <a href='#rss_feed'>More on this here</a> .
           </li>
           <li>
-            Various <a href=''>configuration options</a> .
+            Configure number of records in the list. By default plugin relies on default number of records
+            per page as determined by <tt>will_paginate</tt> . However you can change the default setting like this.
+<pre>
+AdminDataConfig.set = {
+  :will_paginate_per_page => 50
+}
+</pre>
+
           </li>
       </ul>
 
@@ -253,10 +285,10 @@ AdminDataConfig.set = {
 }
 </pre>
 
-    <h3>Customize Security for the whole application</h3>
+    <h3>Custom Security</h3>
     <p>
       Put the following lines of code in an initializer at 
-      <strong>~/config/initializers/admin_data_settings.rb</strong> .
+      <tt>~/config/initializers/admin_data_settings.rb</tt> .
     </p>
 <pre>
 AdminDataConfig.set = {
@@ -275,18 +307,18 @@ AdminDataConfig.set = {
       <h2>Restrict editing of record to only one attribute</h2>
       <p>
         If you are editing a record of user then url might look like this
-        <strong>
+        <tt>
           http://localhost:3000/admin_data/user/881/edit
-        </strong>
+        </tt>
         .
       </p>
 
       <p>
        To avoid visual clutter, if you want to see only one field called 'first_name' while editing 
        then, the url should look like this
-       <strong>
+       <tt>
           http://localhost:3000/admin_data/user/881/edit?attr=first_name
-       </strong>
+       </tt>
        </p>
 
 
@@ -304,7 +336,7 @@ end
 
       <p>
         This plugin will generate show method for city like this 
-        <strong>/admin_data/city/miami</strong> . 
+        <tt>/admin_data/city/miami</tt> . 
         The controller will execute the query assuming that id is ‘miami’ and the record will not be found.
       </p>
       <p>
@@ -363,12 +395,35 @@ AdminDataConfig.set = ({
       </p>  
 
       
+      <a name='rss_feed'></a>
+      <h2>RSS feed for all models</h2>
+      <p>
+        This plugin provides RSS feed for all models. 
+        RSS feed can only be consumed if you are properly authenticated. This plugin uses http basic
+        authentication mechanism to authenticate requests for RSS feed. Given below is how you
+        can provider userid and password against to check for authentcation.
+        </p>
+
+<pre>
+AdminDataConfig.set = {
+  :feed_authentication_user_id => 'admin_data',
+  :feed_authentication_password => 'welcome'
+end
+</pre>
+
+        <p>
+          The url to access RSS feed looks like this for model <tt>user</tt> :
+          <tt>http://localhost:3000/admin_data/feed/user</tt> .
+          In this link substitute <tt>user</tt> with the model you want to track. 
+        </p>
+
+
 
       <a name='how_to_run_test'></a>
       <h2>How to run test</h2>
       <p>
         This plugin has over 200 tests. To run those tests just go to the root of the plugin directory
-        and type <strong>rake</strong> .
+        and type <tt>rake</tt> .
       </p>
       
 
@@ -379,7 +434,7 @@ AdminDataConfig.set = ({
       </p>
 
       <p>
-        Run all the tests by going to the plugin directory and executing <strong>rake</strong> . 
+        Run all the tests by going to the plugin directory and executing <tt>rake</tt> . 
         There are nearly 200 tests and all of them should pass.
       </p>
 
