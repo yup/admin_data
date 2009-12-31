@@ -98,6 +98,7 @@ ul.topics li {margin:4px;padding:4px;}
       <li><a href='#override_default_column'>Override the default behaviour of column</a></li>
       <li> <a href='#only_one_element'> Restrict editing of record to only one attribute </a> </li>
       <li> <a href='#rss_feed'>RSS feed for all models</a> </li>
+      <li> <a href='#custom_order_of_columns'>Custom order of columns in listing</a> </li>
     </ul>
   </div>
   <div class='clear'></div>
@@ -417,6 +418,22 @@ end
           In this link substitute <tt>user</tt> with the model you want to track. 
         </p>
 
+
+      <a name='custom_order_of_columns'></a>
+      <h2>Custom order of columns in listing</h2>
+      <p> 
+        This plugin allows you to customize order of columns in a listing. I have an <tt>Article</tt> model
+        which ,by default, lists columns in following order: id, body, title, author_name, published_at .
+      </p>
+
+      <p>
+        If I want order of columns to be changed then I need to pass only following configuration option.
+<pre>
+AdminDataConfig.set = {
+  :columns_order => {'Article' => [:id, :title, :body, :published_at, :author_name]}  
+}
+</pre>
+      </p>
 
 
       <a name='how_to_run_test'></a>
