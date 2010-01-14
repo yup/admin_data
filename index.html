@@ -70,7 +70,18 @@ ul.topics li {margin:4px;padding:4px;}
 </style>
 </head>
 <body id='wrapper'>
-  <h1>Admin Data Documentation</h1>
+
+  <div>
+    <h1 style='float:left;'>Admin Data Documentation</h1>
+
+    <div style='float:right;background:yellow;padding:10px;margin-top:20px;'>
+      <a href='http://github.com/neerajdotname/admin_data'>Source Code</a>
+      <br />
+      <br />
+      <a href='http://demo.neeraj.name/admin_data'>Live Demo</a>
+    </div>
+    <div class='clear'></div>
+  </div>
 
   <div>
   <div style='float:left;width: 400px;'>
@@ -357,11 +368,15 @@ end
 
 <pre>
 AdminDataConfig.set = {
-  :find_conditions => Proc.new do |params| 
-    { 'City' => {:conditions => { :permanent_name => params[:id]}}}
-  end
+ :find_conditions => {'City' => lambda {|params| {:conditions => ["permanent_name = ?", params[:id]]}}}  
 }
 </pre>
+
+<p>
+You can see a live example of this <a href='http://demo.neeraj.name/admin_data/klass/author/ernest-hemingway'>here</a> . 
+The configuration for this demo application can be seen 
+<a href='http://github.com/neerajdotname/admin_data_demo/blob/master/config/initializers/admin_data_settings.rb'>here</a> .
+</p>
 
 
       <a name='override_default_column'></a>
