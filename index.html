@@ -333,6 +333,19 @@ AdminDataConfig.set = {
       In the above case application_controller.rb must have two method logged_in? and admin_logged_in? .
     </p>
 
+    <p>
+    You can also define security at a model level. Just use @model in the proc and model instance
+    would be made available as @model .
+    </p>
+
+<pre>
+AdminDataConfig.set = {
+  :is_allowed_to_view_model => lambda {|controller| controller.send('logged_in?')  && @model.author_name == 'john' },
+  :is_allowed_to_update => lambda {|controller| controller.send('admin_logged_in?') && @model.author_name == 'john' },
+}
+</pre>
+
+
 
       <a name='delete_vs_destroy'></a>
       <h2>Delete vs Destroy</h2>
