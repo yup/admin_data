@@ -108,6 +108,7 @@ ul.topics li {margin:4px;padding:4px;}
         <li> <a href='#only_one_element'> Restrict editing of record to only one attribute </a> </li>
         <li> <a href='#rss_feed'>RSS feed for all models</a> </li>
         <li> <a href='#custom_order_of_columns'>Custom order of columns in listing</a> </li>
+        <li> <a href='#rake_command'>Rake command</a> </li>
       </ul>
     </div>
 
@@ -490,6 +491,28 @@ AdminDataConfig.set = {
 }
 </pre>
       </p>
+
+
+      <a name='rake_command'></a>
+      <h2>Rake command</h2>
+      <p> 
+        The validate Model Controller invokes a rake task which runs in the background. By default the rake command
+        is <tt>rake</tt> . However in your system if rake is configured at a different path then you can 
+        customize that.
+        </p>
+
+        <p> In one of my machines rake is at <tt>/opt/ruby-enterprise/bin/rake</tt> . This is how I pass
+        the path to the plugin.
+        </p>
+<pre>
+AdminDataConfig.set = {
+  :rake_command => '/opt/ruby-enterprise/bin/rake'
+}
+</pre>
+
+
+
+
 
 
       <a name='how_to_run_test'></a>
