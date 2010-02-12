@@ -502,11 +502,12 @@ AdminDataConfig.set = {
         </p>
 
         <p> In one of my machines rake is at <tt>/opt/ruby-enterprise/bin/rake</tt> . This is how I pass
-        the path to the plugin.
+        the path to the plugin. In the below case for production and staging environment I have a different
+        path for rake command.
         </p>
 <pre>
 AdminDataConfig.set = {
-  :rake_command => '/opt/ruby-enterprise/bin/rake'
+  :rake_options => {:command => '/opt/ruby-enterprise/bin/rake', :env => [:production, :staging] }
 }
 </pre>
 
