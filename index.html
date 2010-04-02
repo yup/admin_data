@@ -413,7 +413,7 @@ AdminDataConfig.set = {
 <a name='ignore_column_limit'></a>
 <h2>Ignore column limit</h2>
 <p>
-<a href='http://www.igvita.com/'>Ilya</a> brought to my attention this <a href='https://rails.lighthouseapp.com/projects/8994/tickets/876'>rails ticket .</a> . If the input field for a column is shorter than it should be then most likely you have run into this problem. One way to get around to this problem is to configure admin_data to not to use <tt>column.limit</tt> . In this way all text fields will have width of <tt>60</tt> . You can configure like this
+<a href='http://www.igvita.com/'>Ilya</a> brought to my attention this <a href='https://rails.lighthouseapp.com/projects/8994/tickets/876'>rails ticket</a> . If the input field for a column is shorter than it should be then most likely you have run into this problem. One way to get around to this problem is to configure admin_data to not to use <tt>column.limit</tt> . In this way all text fields will have width of <tt>60</tt> . You can configure like this
 <pre>
 AdminDataConfig.set = {
   :ignore_column_limit => true
