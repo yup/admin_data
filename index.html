@@ -105,6 +105,7 @@ ul.topics li {margin:4px;padding:4px;}
         <li><a href='#security'>Security configuration</a></li>
         <li><a href='#override_find_condition'>Custom find condition</a></li>
         <li><a href='#override_default_column'>Override the default behaviour of column</a></li>
+        <li><a href='#override_drop_down_associations'>Override drop for down associations</a></li>
         <li> <a href='#only_one_element'> Restrict editing of record to only one attribute </a> </li>
         <li> <a href='#rss_feed'>RSS feed for all models</a> </li>
         <li> <a href='#custom_order_of_columns'>Custom order of columns in listing</a> </li>
@@ -127,218 +128,248 @@ ul.topics li {margin:4px;padding:4px;}
   <div>
 
 
+    
+<a name='introduction'></a>
+<h2>Introduction</h2>
+<h3>What?</h3>
+<p>
+admin_data is a Rails plugin which allows admin of a site to easily browse, search and manage data using browser. <a href='#features'>Here is </a> list of features of this plugin.
+</p>
 
-      <a name='introduction'></a>
-      <h2>Introduction</h2>
-      <h3>What?</h3>
-      <p>
-        admin_data is a Rails plugin which allows admin of a site to easily browse, search and manage data using
-        browser. <a href='#features'>Here is </a> list of features of this plugin.
-      </p>
+<h3>Why?</h3>
+<p>
+  In almost all web based applications, admin needs to have better access to data to perform jobs like monitoring, analysis and debugging.
+</p>
 
-      <h3>Why?</h3>
-      <p>
-        In almost all web based applications, admin needs to have better access to data to perform jobs
-        like monitoring, analysis and debugging.
-      </p>
+<h3>Where?</h3>
+<p>
+  Source code is available <a href='http://github.com/neerajdotname/admin_data'>here</a> . A <a href='http://demo.neeraj.name'>live demo</a> is available here. Note that in the live demo you will not be able to access certain features.
+</p>
 
-      <h3>Where?</h3>
-      <p>
-        Source code is available <a href='http://github.com/neerajdotname/admin_data'>here</a> . A <a href='http://demo.neeraj.name'>live demo</a> is available here. Note that in the live demo you will
-        not be able to access certain features.
-      </p>
-
-      <h3>Who?</h3>
-      <p>
-        This plugin has been developed by <a href='http://neeraj.name'>Neeraj</a> with support from other contributors.
-      </p>
-
-      <a name='non_intrusive'></a>
-      <h2>Non Intrusive</h2>
-      <p>
-        All the features provided by admin_data are totally non intrusive. No change is required anywhere
-        in your application. No named_scope is created and hence no lingering named_scope in your application.
-        Nothing is stored in session or in cookies.
-      </p>
-      <p>
-        Configuration options should be passed to admin_data by creating a file under initializers directory. 
-        The file should look something like
-        <tt>~/config/initializers/admin_data_settings.rb</tt> .
-      </p>
+  <h3>Who?</h3>
+<p>
+  This plugin has been developed by <a href='http://neeraj.name'>Neeraj</a> with support from other contributors.
+</p>
 
 
-      <a name='requirement'></a>
-      <h2>Requirement</h2>
-      <ul>
-        <li>
-          Rails project must be using Rails 2.3.x .
-        </li>
-        <li>
-          will_paginate gem .
-        </li>
-      </ul>
 
-      <a name='installation_instruction'></a>
-      <h2>Source Code and Installation Instruction</h2>
-      <p>
-        Source code is available <a href='http://github.com/neerajdotname/admin_data'>here</a> .
-      </p>
+
+
+
+<a name='non_intrusive'></a>
+<h2>Non Intrusive</h2>
+<p>
+  All the features provided by admin_data are totally non intrusive. No change is required anywhere
+  in your application. No named_scope is created and hence no lingering named_scope in your application.
+  Nothing is stored in session or in cookies.
+</p>
+<p>
+  Configuration options should be passed to admin_data by creating a file under initializers directory. 
+  The file should look something like
+  <tt>~/config/initializers/admin_data_settings.rb</tt> .
+</p>
+
+
+
+
+
+
+<a name='requirement'></a>
+<h2>Requirement</h2>
+<ul>
+  <li>
+    Rails project must be using Rails 2.3.x .
+  </li>
+  <li>
+    will_paginate gem .
+  </li>
+</ul>
+
+
+
+
+
+
+<a name='installation_instruction'></a>
+<h2>Source Code and Installation Instruction</h2>
+<p>
+  Source code is available <a href='http://github.com/neerajdotname/admin_data'>here</a> .
+</p>
 <pre>
 ruby script/plugin install git://github.com/neerajdotname/admin_data.git
 </pre>
 
 
-      <a name='how_to_use_it'></a>
-      <h2>How to use it</h2>
-      <p>
-        Start server and then go to <tt>http://localhost:3000/admin_data </tt> .
-      </p>  
 
-      <a name='how_to_pass_configuration'></a>
-      <h2>How to pass configuration options to plugin</h2>
-      <p>
-        Just create a file named <tt>admin_data_settings.rb</tt> at <tt>~/config/initializers</tt> and
-        in this file put all your custom configurations for this plugin.
-      </p>  
 
-      <a name='features'></a>
-      <h2>Features</h2>
-      <h3>Browsing and Searching</h3>
-      <ul>
-        <li>
-          Browse all records with pagination.
-        </li>
-        <li>
-          Quick search across all records in a table. Quick searche goes through all columns 
-          that are either ‘string’ or ‘text’ type.
-        </li>
-        <li>
-          Advance search for each field of each of the tables. Different options appear for diffent data types. 
-          <a href='http://demo.neeraj.name/admin_data/advance_search/user'>Click here</a> to see advance search 
-          in action. Do try selecting different data types to see different options.
-        </li>
-        <li>
-          For both quick search and advance search, result can be sorted in ascending or in descending order of 
-          any column.
-        </li>
-        <li>
-          Browse <a href='http://demo.neeraj.name/admin_data/migration'>migration records</a> from 
-          schema_migrations table even though there is no corresponding model for this table.
-        </li>
-      </ul>
 
-      <h3>Association Information</h3>
-      <ul>
-        <li>
-          For each individual record a snapshot of all associated records is shown. 
-          <a href='http://demo.neeraj.name/klass/admin_data/user/1'>Click here</a> 
-          to see a record which has 
-          some associations. Notice that you can browse to all associated records by just clicking the link.
-          If an associated record is not present then there will be no link. 
-        </li>
-        <li>
-          Next to has_many association a count of number of associated records is shown.
-        </li>
-        <li>
-          All the associated records are links so you can navigate from record to record.
-        </li>
-      </ul>
 
-      <h3>Model validation</h3>
-      <ul>
-        <li>
-          This plugin comes with a rake task which can be executed to validate all your models. All the 
-          records are retrieved one by one. It means even if you have 5 million records you will not 
-          run out of memory. However it might take a while for validation to complete.
+
+<a name='how_to_use_it'></a>
+<h2>How to use it</h2>
+<p>
+  Start server and then go to <tt>http://localhost:3000/admin_data </tt> .
+</p>  
+
+
+
+
+
+
+
+
+<a name='how_to_pass_configuration'></a>
+<h2>How to pass configuration options to plugin</h2>
+<p>
+  Just create a file named <tt>admin_data_settings.rb</tt> at <tt>~/config/initializers</tt> and
+  in this file put all your custom configurations for this plugin.
+</p>  
+
+
+
+
+
+
+
+<a name='features'></a>
+<h2>Features</h2>
+<h3>Browsing and Searching</h3>
+<ul>
+  <li>
+    Browse all records with pagination.
+  </li>
+  <li>
+    Quick search across all records in a table. Quick searche goes through all columns 
+    that are either ‘string’ or ‘text’ type.
+  </li>
+  <li>
+    Advance search for each field of each of the tables. Different options appear for diffent data types. 
+    <a href='http://demo.neeraj.name/admin_data/advance_search/user'>Click here</a> to see advance search 
+    in action. Do try selecting different data types to see different options.
+  </li>
+  <li>
+    For both quick search and advance search, result can be sorted in ascending or in descending order of 
+    any column.
+  </li>
+  <li>
+    Browse <a href='http://demo.neeraj.name/admin_data/migration'>migration records</a> from 
+    schema_migrations table even though there is no corresponding model for this table.
+  </li>
+</ul>
+
+<h3>Association Information</h3>
+<ul>
+  <li>
+    For each individual record a snapshot of all associated records is shown. 
+    <a href='http://demo.neeraj.name/klass/admin_data/user/1'>Click here</a> 
+    to see a record which has 
+    some associations. Notice that you can browse to all associated records by just clicking the link.
+    If an associated record is not present then there will be no link. 
+  </li>
+  <li>
+    Next to has_many association a count of number of associated records is shown.
+  </li>
+  <li>
+    All the associated records are links so you can navigate from record to record.
+  </li>
+</ul>
+
+<h3>Model validation</h3>
+<ul>
+  <li>
+    This plugin comes with a rake task which can be executed to validate all your models. All the 
+    records are retrieved one by one. It means even if you have 5 million records you will not 
+    run out of memory. However it might take a while for validation to complete.
 <pre>
 rake admin_data:validate_models
 </pre>
-        </li>
-        <li>
-          In certain environment like staging I don’t have access to the box and I can’t run rake tasks. 
-          In such cases you can validate models using browser. Just visit diagnostic section and click on validate models.
-        </li>
-      </ul>
+  </li>
+  <li>
+    In certain environment like staging I don’t have access to the box and I can’t run rake tasks. 
+    In such cases you can validate models using browser. Just visit diagnostic section and click on validate models.
+  </li>
+</ul>
 
-      <h3>Miscellaneous features</h3>
-      <ul>
-        <li>
-          No security check is done in development environment. In any other environment proper security
-          check is done for adding a record, editing a record, deleting a record, browsing a record. 
-          <a href='#security'>Click here</a> for a security overview.
-        </li>
-        <li>
-          admin_data supports namespaced models like <tt>Vehicle::Car</tt> .
-          </li>
-          <li>
-            Diagnostic test lists all the columns which are foreign keys but 
-            <a href='http://demo.neeraj.name/admin_data/diagnostic/missing_index'>index is not defined</a> 
-            on them.
-          </li>
-          <li>
-            Plugin does not assume that all the tables have primary key as ‘id’. It respects the primary_key set in the model.
-          </li>
-          <li>
-            RSS feed for all the models. <a href='#rss_feed'>More on this here</a> .
-          </li>
-          <li>
-            Configure number of records in the list. By default plugin relies on default number of records
-            per page as determined by <tt>will_paginate</tt> . However you can change the default setting like this.
+<h3>Miscellaneous features</h3>
+<ul>
+  <li>
+    No security check is done in development environment. In any other environment proper security
+    check is done for adding a record, editing a record, deleting a record, browsing a record. 
+    <a href='#security'>Click here</a> for a security overview.
+  </li>
+  <li>
+    admin_data supports namespaced models like <tt>Vehicle::Car</tt> .
+  </li>
+  <li>
+      Diagnostic test lists all the columns which are foreign keys but 
+      <a href='http://demo.neeraj.name/admin_data/diagnostic/missing_index'>index is not defined</a> 
+      on them.
+  </li>
+  <li>
+      Plugin does not assume that all the tables have primary key as ‘id’. It respects the primary_key set in the model.
+  </li>
+  <li>
+      RSS feed for all the models. <a href='#rss_feed'>More on this here</a> .
+  </li>
+  <li>
+      Configure number of records in the list. By default plugin relies on default number of records
+      per page as determined by <tt>will_paginate</tt> . However you can change the default setting like this.
+      <pre>
+      AdminDataConfig.set = {
+        :will_paginate_per_page => 50
+      }
+      </pre>
+
+  </li>
+  <li>
+    By default admin_data uses google hosted version of jQuery. However if you want to use local copy
+    of jQuery then pass a parameter to configuration as given below
+    <pre>
+      AdminDataConfig.set = {
+      :use_google_hosted_version => false
+      }
+    </pre>
+   </li>
+</ul>
+
+
+
+
+
+
+
+<a name='security'></a>
+<h2>Security Configurations</h2>
+<p>
+ Default security configuration is to allow both view and update access in development mode and restrict both view and update access in any other environment.
+</p>
+
+<h3>Default Security</h3>
 <pre>
 AdminDataConfig.set = {
-  :will_paginate_per_page => 50
+:is_allowed_to_view => lambda {|controller| return true if Rails.env.development? },
+:is_allowed_to_update => lambda {|controller| return true if Rails.env.development? },
 }
 </pre>
 
-          </li>
-          <li>
-            By default admin_data uses google hosted version of jQuery. However if you want to use local copy
-            of jQuery then pass a parameter to configuration as given below
-<pre>
-AdminDataConfig.set = {
-  :use_google_hosted_version => false
-}
-</pre>
-
-          </li>
-      </ul>
-
-
-      <a name='security'></a>
-      <h2>Security Configurations</h2>
-      <p>
-        Default security configuration is to allow both view and update access in development mode and restrict both view and update access in any other environment.
-      </p>
-
-      <h3>Default Security</h3>
-<pre>
-AdminDataConfig.set = {
-  :is_allowed_to_view => lambda {|controller| return true if Rails.env.development? },
-  :is_allowed_to_update => lambda {|controller| return true if Rails.env.development? },
-}
-</pre>
-
-    <h3>Custom Security</h3>
-    <p>
-      Put the following lines of code in an initializer at 
-      <tt>~/config/initializers/admin_data_settings.rb</tt> .
-    </p>
+<h3>Custom Security</h3>
+<p>
+  Put the following lines of code in an initializer at 
+  <tt>~/config/initializers/admin_data_settings.rb</tt> .
+</p>
 <pre>
 AdminDataConfig.set = {
   :is_allowed_to_view => lambda {|controller| controller.send('logged_in?') },
   :is_allowed_to_update => lambda {|controller| controller.send('admin_logged_in?') },
 }
 </pre>
-
-    <p>
-      In the above case application_controller.rb must have two method logged_in? and admin_logged_in? .
-    </p>
-
-    <p>
-    You can also define security at a model level. Just use @model in the proc and model instance
-    would be made available as @model .
-    </p>
-
+<p>
+  In the above case application_controller.rb must have two method logged_in? and admin_logged_in? .
+</p>
+<p>
+  You can also define security at a model level. Just use @model in the proc and model instance
+  would be made available as @model .
+</p>
 <pre>
 AdminDataConfig.set = {
   :is_allowed_to_view_model => lambda {|controller| controller.send('logged_in?')  && @model.author_name == 'john' },
@@ -348,38 +379,44 @@ AdminDataConfig.set = {
 
 
 
-      <a name='delete_vs_destroy'></a>
-      <h2>Delete vs Destroy</h2>
-      <p>
-        Deleting a record means that a sql query to delete a record. Destroying a record means that
-        model will be instantiated and all the relevant callbacks like <tt>before_destroy</tt> and 
-        <tt>after_destroy</tt> be invoked.
-      </p>
-
-      
-      <a name='only_one_element'></a>
-      <h2>Restrict editing of record to only one attribute</h2>
-      <p>
-        If you are editing a record of user then url might look like this
-        <tt>
-          http://localhost:3000/admin_data/user/881/edit
-        </tt>
-        .
-      </p>
-
-      <p>
-       To avoid visual clutter, if you want to see only one field called 'first_name' while editing 
-       then, the url should look like this
-       <tt>
-          http://localhost:3000/admin_data/user/881/edit?attr=first_name
-       </tt>
-       </p>
 
 
 
-      <a name='override_find_condition'></a>
-      <h2>Override the default find condition</h2>
-      <p> I have a model called 'City' which is defined like this.</p>
+
+<a name='delete_vs_destroy'></a>
+<h2>Delete vs Destroy</h2>
+<p>
+  Deleting a record means that a sql query to delete a record. Destroying a record means that
+  model will be instantiated and all the relevant callbacks like <tt>before_destroy</tt> and 
+  <tt>after_destroy</tt> be invoked.
+</p>
+
+
+
+
+
+<a name='only_one_element'></a>
+<h2>Restrict editing of record to only one attribute</h2>
+<p>
+  If you are editing a record of user then url might look like this
+  <tt> http://localhost:3000/admin_data/user/881/edit </tt> .
+</p>
+
+<p>
+ To avoid visual clutter, if you want to see only one field called 'first_name' while editing 
+ then, the url should look like this
+ <tt> http://localhost:3000/admin_data/user/881/edit?attr=first_name </tt>
+</p>
+
+
+
+
+
+
+
+<a name='override_find_condition'></a>
+<h2>Override the default find condition</h2>
+<p> I have a model called 'City' which is defined like this.</p>
 <pre>
 class City < ActiveRecord::Base
   def to_param
@@ -388,14 +425,14 @@ class City < ActiveRecord::Base
 end
 </pre>
 
-      <p>
-        This plugin will generate show method for city like this 
-        <tt>/admin_data/city/miami</tt> . 
-        The controller will execute the query assuming that id is ‘miami’ and the record will not be found.
-      </p>
-      <p>
-        Here is how to pass custom find option to admin_data.
-      </p>
+<p>
+  This plugin will generate show method for city like this 
+  <tt>/admin_data/city/miami</tt> . 
+  The controller will execute the query assuming that id is ‘miami’ and the record will not be found.
+</p>
+<p>
+  Here is how to pass custom find option to admin_data.
+</p>
 
 <pre>
 AdminDataConfig.set = {
@@ -410,57 +447,78 @@ The configuration for this demo application can be seen
 </p>
 
 
-      <a name='override_default_column'></a>
-      <h2>Override the default behaviour of column</h2>
-      <p> I have a model like this</p>
+
+
+
+
+
+
+<a name='override_default_column'></a>
+<h2>Override the default behaviour of column</h2>
+<p> I have a model like this</p>
 <pre>
 class Car < ActiveRecord::Base
   serialize :data
 end
 </pre>
-
-      <p>I am going to create a record and set a value to data.</p>
-
+<p>I am going to create a record and set a value to data.</p>
 <pre>
 Car.create(:color => ‘black’, :year => ‘2000’)
 </pre>
-
-      <p>If you look at this record using admin_data then for the column ‘data’ you will see value like this. </p>
+<p>If you look at this record using admin_data then for the column ‘data’ you will see value like this. </p>
 <pre>
 colorblackyear2000 
 </pre>
-
-      <p>
-        This is not very useful. However I know that I am getting that value because that is output of 
-        to_s operation on a hash. If I could ask plugin to perform to_inspect method on a hash 
-        then output will be much more easy to read.  Given below is how I can ask plugin to perform inspect method on data column.
-      </p>
-
+<p>
+  This is not very useful. However I know that I am getting that value because that is output of 
+  to_s operation on a hash. If I could ask plugin to perform to_inspect method on a hash 
+  then output will be much more easy to read.  Given below is how I can ask plugin to perform inspect method on data column.
+</p>
 <pre>
 AdminDataConfig.set = ({
   :column_settings => { 'Car' => { :data => lambda{|model| model.send(:data).inspect}}}
 })
 </pre>
 
-      <p>
-        The plugin passes the whole model record to the proc and the users can customize the value for 
-        that model as per their taste.
-      </p>  
+<p>
+  The plugin passes the whole model record to the proc and the users can customize the value for 
+  that model as per their taste.
+</p>  
 
-      <p>
-        Based on this setting the new output would be much more readable and you can see the 
-        <a hre='http://demo.neeraj.name/admin_data/car/1'>result here</a> .
-      </p>  
+<p>
+  Based on this setting the new output would be much more readable and you can see the 
+  <a hre='http://demo.neeraj.name/admin_data/car/1'>result here</a> .
+</p>  
 
-      
-      <a name='rss_feed'></a>
-      <h2>RSS feed for all models</h2>
-      <p>
-        This plugin provides RSS feed for all models. 
-        RSS feed can only be consumed if you are properly authenticated. This plugin uses http basic
-        authentication mechanism to authenticate requests for RSS feed. Given below is how you
-        can provider userid and password against to check for authentcation.
-        </p>
+
+
+
+
+
+<a name='override_drop_down_associations'></a>
+<h2>Replace drop down associations with input text</h2>
+<p> Let's say that I have users table and phone_numbers table. And I have thousands of records. If I got to edit a phone number then I would be presented with the drop down of all the user ids. If I have 50K user records then page will be slow .</p>
+
+<p>
+To get around to this type of problem you can configure admin_data such that in stead of drop down select field , you will get input text field. This is how you can configre
+</p>
+<pre>
+AdminDataConfig.set = ({
+ :drop_down_for_associations => false
+})
+</pre>
+
+
+
+
+<a name='rss_feed'></a>
+<h2>RSS feed for all models</h2>
+<p>
+  This plugin provides RSS feed for all models. 
+  RSS feed can only be consumed if you are properly authenticated. This plugin uses http basic
+  authentication mechanism to authenticate requests for RSS feed. Given below is how you
+  can provider userid and password against to check for authentcation.
+</p>
 
 <pre>
 AdminDataConfig.set = {
@@ -469,42 +527,50 @@ AdminDataConfig.set = {
 end
 </pre>
 
-        <p>
-          The url to access RSS feed looks like this for model <tt>user</tt> :
-          <tt>http://localhost:3000/admin_data/feed/user</tt> .
-          In this link substitute <tt>user</tt> with the model you want to track. 
-        </p>
+<p>
+  The url to access RSS feed looks like this for model <tt>user</tt> :
+  <tt>http://localhost:3000/admin_data/feed/user</tt> .
+  In this link substitute <tt>user</tt> with the model you want to track. 
+</p>
 
 
-      <a name='custom_order_of_columns'></a>
-      <h2>Custom order of columns in listing</h2>
-      <p> 
-        This plugin allows you to customize order of columns in a listing. I have an <tt>Article</tt> model
-        which ,by default, lists columns in following order: id, body, title, author_name, published_at .
-      </p>
 
-      <p>
-        If I want order of columns to be changed then I need to pass only following configuration option.
+
+
+
+<a name='custom_order_of_columns'></a>
+<h2>Custom order of columns in listing</h2>
+<p> 
+  This plugin allows you to customize order of columns in a listing. I have an <tt>Article</tt> model
+  which ,by default, lists columns in following order: id, body, title, author_name, published_at .
+</p>
+
+<p>
+If I want order of columns to be changed then I need to pass only following configuration option.
 <pre>
 AdminDataConfig.set = {
   :columns_order => {'Article' => [:id, :title, :body, :published_at, :author_name]}  
 }
 </pre>
-      </p>
+</p>
 
 
-      <a name='rake_command'></a>
-      <h2>Rake command</h2>
-      <p> 
-        The validate Model Controller invokes a rake task which runs in the background. By default the rake command
-        is <tt>rake</tt> . However in your system if rake is configured at a different path then you can 
-        customize that.
-        </p>
 
-        <p> In one of my machines rake is at <tt>/opt/ruby-enterprise/bin/rake</tt> . This is how I pass
-        the path to the plugin. In the below case for production and staging environment I have a different
-        path for rake command.
-        </p>
+
+
+
+<a name='rake_command'></a>
+<h2>Rake command</h2>
+<p> 
+  The validate Model Controller invokes a rake task which runs in the background. By default the rake command
+  is <tt>rake</tt> . However in your system if rake is configured at a different path then you can 
+  customize that.
+</p>
+
+<p> In one of my machines rake is at <tt>/opt/ruby-enterprise/bin/rake</tt> . This is how I pass
+  the path to the plugin. In the below case for production and staging environment I have a different
+  path for rake command.
+</p>
 <pre>
 AdminDataConfig.set = {
   :rake_options => {:command => '/opt/ruby-enterprise/bin/rake', :env => [:production, :staging] }
@@ -516,36 +582,47 @@ AdminDataConfig.set = {
 
 
 
-      <a name='how_to_run_test'></a>
-      <h2>How to run test</h2>
-      <p>
-        This plugin has over 200 tests. To run those tests just go to the root of the plugin directory
-        and type <tt>rake</tt> .
-      </p>
-      
-
-      <a name='tested_with'></a>
-      <h2>Tested With</h2>
-      <p>
-        I have tested this plugin with MySQL, PostgreSQL and Oracle.
-      </p>
-
-      <p>
-        Run all the tests by going to the plugin directory and executing <tt>rake</tt> . 
-        There are nearly 200 tests and all of them should pass.
-      </p>
 
 
-      <a name='feedback'></a>
-      <h2>Feedback</h2>
-      <ul>
-        <li>
-          Email me: neerajdotname [at] gmail (dot) com
-        </li>
-        <li>
-        Report any bug at <a href='http://github.com/neerajdotname/admin_data/issues'>http://github.com/neerajdotname/admin_data/issues</a> .
-        </li>
-      </ul>
+<a name='how_to_run_test'></a>
+<h2>How to run test</h2>
+<p>
+  This plugin has over 200 tests. To run those tests just go to the root of the plugin directory
+  and type <tt>rake</tt> .
+</p>
+
+
+
+
+
+
+<a name='tested_with'></a>
+<h2>Tested With</h2>
+<p>
+  I have tested this plugin with MySQL, PostgreSQL and Oracle.
+</p>
+
+<p>
+  Run all the tests by going to the plugin directory and executing <tt>rake</tt> . 
+  There are nearly 200 tests and all of them should pass.
+</p>
+
+
+
+
+
+<a name='feedback'></a>
+<h2>Feedback</h2>
+<ul>
+  <li>
+    Email me: neeraj.cmu [at] gmail (dot) com
+  </li>
+  <li>
+  Report any bug at <a href='http://github.com/neerajdotname/admin_data/issues'>http://github.com/neerajdotname/admin_data/issues</a> .
+  </li>
+</ul>
+
+
 
 
     </div>  
