@@ -16,12 +16,9 @@ rails_root = File.join(pwd , 'rails_root')
 require "#{rails_root}/config/environment.rb"
 
 #require all the lib files plugin needs
-Dir[File.join(pwd, '..', 'lib', 'admin_data', '*.rb')].each {|f| require f}
+Dir[File.join(pwd, '..', 'lib', '**', '*.rb')].each {|f| require f}
 
-#require validation code
-f = File.join(pwd, '..', 'lib', '*.rb')
-Dir.glob(f).each {|file| require file }
-
+# initialize defaults
 AdminDataConfig.initialize_defaults
 
 #require all the controllers plugins needs
@@ -34,8 +31,7 @@ ActionView::Base.send :include, AdminData::Helpers
 require "#{rails_root}/../../config/routes.rb"
 
 #require all the controllers from the test controllers
-f = File.join(pwd, 'rails_root', 'app', 'controllers', '*.rb')
-Dir.glob(f).each {|controller| require controller }
+Dir[File.join(pwd, 'rails_root', 'app', 'controllers', '*.rb')].each {|controller| require controller }
 
 require 'test/unit'
 require 'test_help'
@@ -61,7 +57,7 @@ require 'flexmock'
 gem 'redgreen'
 require 'RedGreen'
 
-# to test helper tests
+# for helper tests
 require 'action_view/test_case'
 
 Dir[File.join(pwd, 'factories', '*.rb')].each { |f| require File.expand_path(f) }
