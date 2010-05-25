@@ -19,6 +19,7 @@ require "#{rails_root}/config/environment.rb"
 Dir[File.join(pwd, '..', 'lib', '**', '*.rb')].each {|f| require f}
 
 # initialize defaults
+# TODO change the name to AdminData::Config
 AdminDataConfig.initialize_defaults
 
 #require all the controllers plugins needs
@@ -31,7 +32,7 @@ ActionView::Base.send :include, AdminData::Helpers
 require "#{rails_root}/../../config/routes.rb"
 
 #require all the controllers from the test controllers
-Dir[File.join(pwd, 'rails_root', 'app', 'controllers', '*.rb')].each {|controller| require controller }
+#Dir[File.join(pwd, 'rails_root', 'app', 'controllers', '*.rb')].each {|controller| require controller }
 
 require 'test/unit'
 require 'test_help'
