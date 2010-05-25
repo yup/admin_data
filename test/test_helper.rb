@@ -82,7 +82,7 @@ class ActiveSupport::TestCase
   end
 
   def show_response
-    Dir.mkdir(File.join(RAILS_ROOT, 'tmp')) unless File.directory?(File.join(RAILS_ROOT,'tmp'))
+    Dir.mkdir(File.join(RAILS_ROOT, 'tmp')) unless File.directory?(File.join(RAILS_ROOT, 'tmp'))
     response_html = File.join(RAILS_ROOT, 'tmp', 'response.html')
     File.open(response_html, 'w') { |f| f.write(@response.body) }
     system 'open ' + File.expand_path(response_html) rescue nil
