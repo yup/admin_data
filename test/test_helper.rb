@@ -1,29 +1,31 @@
-$:.unshift(File.join(File.dirname(__FILE__) + '..', 'lib'))
-$:.unshift(File.join(File.dirname(__FILE__) + '..', 'app'))
-$:.unshift(File.join(File.dirname(__FILE__) + '..', 'app','controllers'))
-$:.unshift(File.join(File.dirname(__FILE__) + '..', 'app','controllers','admin_data'))
+pwd = File.dirname(__FILE__)
+
+$:.unshift File.join(pwd + '..', 'lib')
+$:.unshift File.join(pwd + '..', 'app')
+$:.unshift File.join(pwd + '..', 'app', 'controllers')
+$:.unshift File.join(pwd + '..', 'app', 'controllers', 'admin_data')
 
 module AdminData
 end
 
 ENV['RAILS_ENV'] = 'test'
 
-rails_root = File.join(File.dirname(__FILE__) , 'rails_root')
+rails_root = File.join(pwd , 'rails_root')
 
 # start rails
 require "#{rails_root}/config/environment.rb"
 
-#require all the lib items plugin needs
-Dir[File.join(File.dirname(__FILE__), '..', 'lib', 'admin_data', '*.rb')].each {|f| require f}
+#require all the lib files plugin needs
+Dir[File.join(pwd, '..', 'lib', 'admin_data', '*.rb')].each {|f| require f}
 
 #require validation code
-f = File.join(File.dirname(__FILE__), '..', 'lib', '*.rb')
+f = File.join(pwd, '..', 'lib', '*.rb')
 Dir.glob(f).each {|file| require file }
 
 AdminDataConfig.initialize_defaults
 
 #require all the controllers plugins needs
-Dir[File.join(File.dirname(__FILE__), '..', 'app', 'controllers', 'admin_data', '*.rb')].each {|f| require f}
+Dir[File.join(pwd, '..', 'app', 'controllers', 'admin_data', '*.rb')].each {|f| require f}
 
 # make sure that plugin views have access to helpers
 ActionView::Base.send :include, AdminData::Helpers
@@ -32,7 +34,7 @@ ActionView::Base.send :include, AdminData::Helpers
 require "#{rails_root}/../../config/routes.rb"
 
 #require all the controllers from the test controllers
-f = File.join(File.dirname(__FILE__), 'rails_root', 'app', 'controllers', '*.rb')
+f = File.join(pwd, 'rails_root', 'app', 'controllers', '*.rb')
 Dir.glob(f).each {|controller| require controller }
 
 require 'test/unit'
@@ -50,7 +52,7 @@ require 'shoulda'
 gem 'will_paginate'
 require 'will_paginate'
 
-gem 'factory_girl','= 1.2.4'
+gem 'factory_girl', '= 1.2.4'
 require 'factory_girl'
 
 gem 'flexmock'
@@ -62,7 +64,7 @@ require 'RedGreen'
 # to test helper tests
 require 'action_view/test_case'
 
-Dir[File.join(File.dirname(__FILE__), 'factories', '*.rb')].each { |f| require File.expand_path(f) }
+Dir[File.join(pwd, 'factories', '*.rb')].each { |f| require File.expand_path(f) }
 
 class ActiveSupport::TestCase
 
